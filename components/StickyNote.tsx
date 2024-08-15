@@ -6,7 +6,7 @@ function StickyNote({ note, id }: { note: string; id: any }) {
   return (
     <div
       id={id}
-      class=" bg-blue-200 text-blue-800 p-4 rounded-lg shadow-lg w-[200px] break-words whitespace-normal"
+      class=" bg-blue-200 text-blue-800 p-4 rounded-lg shadow-lg w-[200px] h-auto break-words whitespace-normal"
       style={{ transform: `rotate(${rotation()}deg)`, "max-width": "10" }}
     >
       {note}

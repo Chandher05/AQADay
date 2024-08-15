@@ -23,7 +23,7 @@ const App: Component = () => {
   });
 
   return (
-    <div class="h-screen bg-gradient-to-bl from-blue-600 to-blue-950 font-mono">
+    <div class=" min-h-screen bg-gradient-to-bl from-blue-600 to-blue-950 font-mono">
       <div class=" flex justify-center bg-blue-950 p-10 shadow-xl rounded-b-xl">
         <header class=" h-full items-center text-white text-center flex flex-col gap-3">
           {/* <h4>The question of the day!</h4> */}
