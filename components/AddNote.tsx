@@ -3,11 +3,7 @@ import { supabase } from "../utils/supabase";
 
 export function AddNote({ refresh }: { refresh: () => void }) {
   const [currentAnswer, setCurrentAnswer] = createSignal<string>("");
-  // const onSubmit = (text: string) => {
-  //   setAnswers([...answers(), text]);
-  //   setCurrentAnswer("");
-  // };
-  //
+
   const onSubmit = async (text: string) => {
     const { data, error } = await supabase
       .from("notes")
