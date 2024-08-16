@@ -5,6 +5,7 @@ export function AddNote({ refresh }: { refresh: () => void }) {
   const [currentAnswer, setCurrentAnswer] = createSignal<string>("");
 
   const onSubmit = async (text: string) => {
+    if (!text) return;
     const { data, error } = await supabase
       .from("notes")
       .insert([{ note: text }]);
@@ -27,7 +28,8 @@ export function AddNote({ refresh }: { refresh: () => void }) {
         placeholder="Type your answer here"
       ></input>
       <button
-        class="rounded-2xl bg-blue-100 p-2 text-black px-5"
+        disabled={currentAnswer() === ""}
+        class="rounded-2xl bg-blue-100 p-2 text-black px-5 cursor-auto"
         onClick={() => onSubmit(currentAnswer())}
       >
         Submit
