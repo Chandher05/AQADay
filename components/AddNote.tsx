@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import { supabase } from "../utils/supabase";
 
-export function AddNote({ refresh }: { refresh: () => void }) {
+export function AddNote({ addNote }: { addNote: (ans: string) => void }) {
   const [currentAnswer, setCurrentAnswer] = createSignal<string>("");
 
   const onSubmit = async (text: string) => {
@@ -14,7 +14,7 @@ export function AddNote({ refresh }: { refresh: () => void }) {
     } else {
       console.log("Note added:", data);
       setCurrentAnswer(""); // Clear the input field after adding
-      refresh();
+      addNote(text);
     }
   };
 

@@ -3,6 +3,7 @@ import { createSignal, type Component, onMount } from "solid-js";
 import StickyNote from "../components/StickyNote";
 import { AddNote } from "../components/AddNote";
 import { supabase } from "../utils/supabase";
+import { shuffleArray } from "../utils/helpers";
 
 const App: Component = () => {
   const [question, _] = createSignal("What’s your spirit animal and why?");
@@ -32,13 +33,19 @@ const App: Component = () => {
     if (error) {
       console.error(error);
     } else {
-      setAnswers(data.map((x) => x.note));
+      const notes = data.map((x) => x.note);
+      const randomNotesOrder = shuffleArray(notes);
+      setAnswers(randomNotesOrder);
     }
   };
 
   onMount(async () => {
     refresh();
   });
+
+  const addNote = (ans: string) => {
+    setAnswers((prev) => [ans, ...prev]);
+  };
 
   return (
     <div class=" min-h-screen bg-gradient-to-bl from-blue-600 to-blue-950 font-mono">
@@ -51,7 +58,7 @@ const App: Component = () => {
           <br />
           <h1 class="text-3xl font-bold">{question()}</h1>
 
-          <AddNote refresh={refresh} />
+          <AddNote addNote={addNote} />
         </header>
       </div>
       <div class="text-white flex p-10 gap-4 flex-wrap place-items-center gap-y-10 px-50 m-auto justify-center">
