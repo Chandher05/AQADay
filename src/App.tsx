@@ -6,7 +6,7 @@ import { supabase } from "../utils/supabase";
 import { shuffleArray } from "../utils/helpers";
 
 const App: Component = () => {
-  const [question, _] = createSignal("What’s your spirit animal and why?");
+  const [question, _] = createSignal("What are you grateful for today?");
   const [answers, setAnswers] = createSignal<string[]>([]);
 
   const refresh = async () => {
