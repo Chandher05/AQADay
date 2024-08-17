@@ -6,8 +6,22 @@ import { supabase } from "../utils/supabase";
 import { shuffleArray } from "../utils/helpers";
 
 const App: Component = () => {
-  const [question, _] = createSignal("What are you grateful for today?");
+  const [question, setQuestion] = createSignal("question....");
   const [answers, setAnswers] = createSignal<string[]>([]);
+
+  const fetchQuestion = async () => {
+    const todayIST = new Date().toISOString().split("T")[0];
+    const { data, error } = await supabase
+      .from("question")
+      .select("question")
+      .eq("target_date", todayIST); // Filter based on the specific date
+    console.log(data);
+    if (error) {
+      console.error("Error fetching questions:", error);
+    } else {
+      setQuestion(data.map((x) => x.question)[0]);
+    }
+  };
 
   const refresh = async () => {
     // Get the current date and time in IST
@@ -40,6 +54,7 @@ const App: Component = () => {
   };
 
   onMount(async () => {
+    fetchQuestion();
     refresh();
   });
 
