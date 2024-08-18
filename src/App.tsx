@@ -10,7 +10,8 @@ const App: Component = () => {
   const [answers, setAnswers] = createSignal<string[]>([]);
 
   const fetchQuestion = async () => {
-    const todayIST = new Date().toISOString().split("T")[0];
+    const todayIST = new Date().toLocaleDateString("en-CA").split("T")[0];
+    console.log({ todayIST });
     const { data, error } = await supabase
       .from("question")
       .select("question")
